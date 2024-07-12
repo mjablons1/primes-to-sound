@@ -1,5 +1,6 @@
 import numpy as np
 import pyaudio
+from scipy.io.wavfile import write
 
 # Ensure script is usable even if user environment does not contain pyqtgraph package.
 try:
@@ -92,11 +93,13 @@ if __name__ == "__main__":
     primes_signal -= np.average(primes_signal)
     # normalize
     primes_signal /= np.max(primes_signal)
+    # format
+    primes_signal = primes_signal.astype(np.float32)
 
-    # uncomment to explore the signal visually before listening (you will need pyqtgraph in your env).
+    # uncomment to explore the signal visually before listening (you will need pyqtgraph in your env)
     # show_plot()
 
-    # Send signal to audio output using pyAudio.
+    # send signal to audio output using pyAudio
 
     # set up mono audio stream:
     p = pyaudio.PyAudio()
@@ -110,9 +113,12 @@ if __name__ == "__main__":
           f'    AUDIO_OUTPUT_SAMPLING_FREQUENCY = {AUDIO_OUTPUT_SAMPLING_FREQUENCY}')
 
     # write the output in one go. (lazy)
-    stream.write(primes_signal.astype(np.float32).tobytes())
+    stream.write(primes_signal.tobytes())
 
     # clean up
     stream.stop_stream()
     stream.close()
     p.terminate()
+
+    # write to a wave file
+    write('sound_of_primes.wav', AUDIO_OUTPUT_SAMPLING_FREQUENCY, primes_signal)
