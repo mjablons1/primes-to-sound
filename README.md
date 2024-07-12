@@ -14,6 +14,8 @@ After normalizing, the waveform is played back on your default audio output devi
 
 ## What does it sound like?
 
+[Example prime audio](sound_of_primes.wav)
+
 It's worthwhile to check it on the headphones. The signal sounds to me very similar to the background noise in a passenger jet airliner with the lowest components resembling perturbed air stream and higher sounds resembling high speed rotating engines. Interestingly changing the window length does not seem to change that impression much except for increasing / decreasing fidelity (short windows cause lower bit depth output, longer generate smoother waveforms).
 
 ## What does it look like?
